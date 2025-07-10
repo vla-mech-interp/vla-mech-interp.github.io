@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mechanistic Interpretability for Steering Vision Language Action Models</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              <br>Mechanistic Interpretability for Steering Vision Language Action Models
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://your-link.com/bear-haon" target="_blank">Bear Häon<sup>*</sup></a> &nbsp;&nbsp;
+                <a href="https://your-link.com/kaylene-stocking" target="_blank">Kaylene Stocking<sup>*</sup></a> &nbsp;&nbsp;
+                <a href="https://your-link.com/ian-chuang" target="_blank">Ian Chuang</a> &nbsp;&nbsp;
+                <a href="https://your-link.com/claire-tomlin" target="_blank">Claire Tomlin</a>
+              </span>
+            </div>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">
+                <sup>*</sup>Equal contribution
+              </span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                University of California, Berkeley             </span>
+            </div>
+         
+           
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+    
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <img src="./static/images/hero.png" alt="Hero image" style="max-width: 100%; height: auto;">
+      <h2 class="subtitle">
+        <br>We show that you can steer robot behavior in real time by directly activating semantically meaningful VLA neurons - unlocking a new, interpretable interface for zero-shot robot control.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3"><br>Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Vision-Language-Action (VLA) models are a promising path to realizing generalist embodied agents that can quickly adapt to new tasks, modalities, and environments. However, methods for interpreting and steering VLAs fall far short of classical robotics pipelines, which are grounded in explicit models of kinematics, dynamics, and control. This lack of mechanistic insight is a central challenge for deploying learned policies in real-world robotics, where robustness and explainability are critical.
+       
+          
+            Motivated by advances in mechanistic interpretability for large language models, we introduce the first framework for interpreting and steering VLAs via their internal representations, enabling direct intervention in model behavior at inference time. We project feedforward activations within transformer layers onto the token embedding basis, identifying sparse semantic directions – such as <em>speed</em>, <em>precision</em>, and <em>caution</em> – that are causally linked to action selection.
+          
+          
+            Leveraging these findings, we introduce a general-purpose activation steering method that modulates behavior in real time, without fine-tuning, reward signals, or environment interaction. We evaluate this method on two recent open-source VLAs, <span>&pi;<sub>0</sub></span> and <span style="font-variant: small-caps;">OpenVLA</span>, and demonstrate both zero-shot behavioral control and task performance improvements in simulation (LIBERO) and on a physical robot (UR5).
+          
+            <strong>This work demonstrates that interpretable components of embodied VLAs can be systematically harnessed for control – establishing a new paradigm for transparent and steerable foundation models in robotics.</strong><br><br><br>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+  </div>
+</section>
+
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Interpreting VLAs</h2>
+        <h3 class="title is-4">A compositional analytical method for scientists building VLAs</h3>
+
+        <div class="content has-text-justified">
+          <p>
+            We introduce a method to probe the <strong>internal structure of VLA models</strong> by analyzing the <strong>feedforward layers</strong> of each transformer block.
+            Each FFN computes:
+          </p>
+        
+          <div style="text-align: center; font-size: 1.2rem; margin: 1rem 0;">
+            \[
+            \begin{equation}
+              \text{FFN}(x) = \sum_i [f_\theta(x)]_i w_\theta^{(i)} \tag{1}
+            \end{equation}
+            \]
+          </div>
+        
+        
+          <p>
+            Each fixed <strong>value vector</strong> \( w^{(i)}_\theta \) lives in token space.
+            By projecting these vectors to the model’s vocabulary, we identify <strong>semantically meaningful neurons</strong> — aligned with robot control concepts like
+            <em>up</em>, <em>slow</em>, and <em>careful</em>.
+          </p>
+        
+          <p>
+            We use this method to uncover <strong>four key insights</strong> into how VLAs internally represent and evolve their understanding of language and control.
+          </p>
+        </div>
+
+        <section class="section">
+          <div class="container is-max-desktop">
+            <div class="columns is-vcentered" style="align-items: stretch;">
+        
+              <!-- Left-hand Side: Buttons -->
+              <div class="column is-one-quarter">
+                <div id="concept-buttons"
+                class="buttons is-fullwidth is-flex-direction-column"
+                style="height: 350px; display: flex; flex-direction: column; justify-content: space-between;">
+                             <button class="button is-light is-fullwidth is-dark" style="flex: 1; white-space: normal;" onclick="showConceptTab(0)">
+                    Post-VLA Training: Semantic Concepts Persist
+                  </button>
+                  <button class="button is-light is-fullwidth" style="flex: 1; white-space: normal;" onclick="showConceptTab(1)">
+                    Post-VLA Training: Action Tokens Appear in All Layers
+                  </button>
+                  <button class="button is-light is-fullwidth" style="flex: 1; white-space: normal;" onclick="showConceptTab(2)">
+                    VLA Finetuning: Mainly Affects Action Tokens
+                  </button>
+                  <button class="button is-light is-fullwidth" style="flex: 1; white-space: normal;" onclick="showConceptTab(3)">
+                    VLA Finetuning: Induces a Specialized Distribution
+                  </button>
+                </div>
+              </div>
+        
+              <!-- Right-hand Side: Image + Caption -->
+              <div class="column is-three-quarters">
+                <div id="concept-tab-content"
+                style="height: 350px; overflow: hidden; display: flex; flex-direction: column;">
+                             <div class="concept-tab-pane active" style="flex: 1;">
+                    <img src="./static/images/interp_1.png" alt="Figure 1" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
+                    <p class="mt-2" style="font-size: 0.9rem;">
+                      <strong>Meaningful patterns in top value vector tokens.</strong> VLA training does not substantially change the proportion of FFN value vectors which have interpretable patterns (top lighter bars) and semantically meaningful patterns (bold bottom bars) in their top tokens
+                    </p>
+                  </div>
+                  <!-- Tab 1 -->
+                  <div class="concept-tab-pane" style="flex: 1;">
+                    <img src="./static/images/interp_2.png" alt="Figure 2" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
+                    <p class="mt-2" style="font-size: 0.9rem;">
+                      <strong>Action tokens are incorporated into every layer of the VLA.</strong> However, they make up the largest proportion of final layer value vectors.}.
+                    </p>
+                  </div>
+                  <!-- Tab 2 -->
+                  <div class="concept-tab-pane" style="flex: 1;">
+                    <img src="./static/images/interp_3.png" alt="Figure 3" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
+                    <p class="mt-2" style="font-size: 0.9rem;">
+                      <strong>Task fine-tuning mainly affects action tokens.</strong> The most up-weighted and down-weighted tokens between the pi_0-FAST and pi_0-FAST-DROID-finetune models are action tokens.
+                    </p>
+                  </div>
+                  <!-- Tab 3 -->
+                  <div class="concept-tab-pane" style="flex: 1;">
+                    <img src="./static/images/interp_4.png" alt="Figure 4" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
+                    <p class="mt-2" style="font-size: 0.9rem;">
+                      <strong>Fine-tuning induces a more specialized (less general) distribution of action tokens across value vectors</strong> 
+                    </p>
+                  </div>
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        </section>
+        
+    
+        </div>
+    </section>
+    
+
+    <section class="section" style="background-color: #f5f5f5;">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Steering VLAs</h2>
+        <h3 class="title is-4">A zero-shot control interface for deploying robots aligned with human preferences</h3>
+    
+        <div class="content has-text-justified">
+          <p>
+            We introduce <strong>interpretable activation-level steering</strong> for VLAs: a real-time control method that modifies selected FFN neurons in the VLA’s transformer—<em>without fine-tuning or reward signals</em>.
+          </p>
+        
+        
+          <p>
+            Following Equation (1), we override activations for a subset \( \mathcal{S} \) of control-themed neuron clusters using a scalar \( \alpha \), inducing a residual shift:
+          </p>
+        
+                    <!-- Equation 2 -->
+          <p style="text-align: center; font-size: 1.1rem; margin: 1rem 0;">
+            \[
+            \tilde{f}_\theta^{(i)}(x) =
+            \begin{cases}
+            \alpha & \text{if } i \in \mathcal{S} \\
+            [f_\theta(x)]_i & \text{otherwise}
+            \end{cases}
+            \tag{2}
+            \]
+          </p>
+
+          <!-- Equation 3 -->
+          <p style="text-align: center; font-size: 1.1rem; margin-bottom: 1rem;">
+            \[
+            \text{FFN}_{\text{steered}}(x) = \sum_i \tilde{f}_\theta^{(i)}(x) \cdot w_\theta^{(i)} \tag{3}
+            \]
+          </p>
+
+        
+          <p>
+            This shift propagates through the transformer and steers the final action distribution.
+            Across VLAs, we implement this in either <strong>PyTorch</strong> (via FFN hooks) or <strong>JAX</strong> (via a parameterized FFN), enabling direct behavioral modulation grounded in neuron semantics.
+          </p>
+        </div>
+    
+        <!-- 1. Binary Control: Low/High -->
+        <!-- Section Header -->
+<h4 class="title is-5">Binary Control Opposites: Direction</h4>
+
+<!-- Two Columns -->
+<div class="columns">
+  <!-- Column 1 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">⬇️</div>
+      <strong>“Low” Neuron Cluster Activated</strong>
+      <p style="margin: 0;">The robot achieves the natural language task within a lower surface space.</p>
+      <p style="margin: 0;"><code><span>&pi;<sub>0</sub>-Fast</span> : UR5</code></p>
+    </div>
+    <!-- Video -->
+    <video autoplay muted loop playsinline width="100%">
+      <source src="./static/videos/low.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Column 2 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">⬆️</div>
+      <strong>“High” Neuron Cluster Activated</strong>
+      <p style="margin: 0;">The robot achieves the natural language task within a higher surface space.</p>
+      <p style="margin: 0;"><code><span>&pi;<sub>0</sub>-Fast</span> : UR5</code></p>
+    </div>
+    <!-- Video -->
+    <video autoplay muted loop playsinline width="100%">
+      <source src="./static/videos/high.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+  
+<h4 class="title is-5">Binary Control Opposites: Speed</h4>
+
+<!-- Two Columns -->
+<div class="columns">
+  <!-- Column 1 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">⚡</div>
+      <strong>“Fast” Neuron Cluster Activated</strong>
+      <p style="margin: 0;">The robot achieves the natural language task at a faster speed.</p>
+      <p style="margin: 0;"><code><span>&pi;<sub>0</sub>-Fast</span> : UR5</code></p>
+    </div>
+    <!-- Video -->
+    <video autoplay muted loop playsinline width="100%">
+      <source src="./static/videos/fast.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Column 2 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">⏳</div>
+      <strong>“Slow” Neuron Cluster Activated</strong>
+      <p style="margin: 0;">The robot achieves the natural language task at a slower speed.</p>
+      <p style="margin: 0;"><code><span>&pi;<sub>0</sub>-Fast</span> : UR5</code></p>
+    </div>
+    <!-- Video -->
+    <video autoplay muted loop playsinline width="100%">
+      <source src="./static/videos/slow.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+    
+        <!-- 3. Performance: Up is all you need? -->
+        <h4 class="title is-5">Performance: <em>Up is all you need?</em></h4>
+       
+<!-- Two Columns -->
+<div class="columns">
+  <!-- Column 1 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">🔴</div>
+      <strong>No Intervention</strong>
+      <p style="margin: 0;">In 41% of task failures, the robot gets stuck and becomes motionless.</p>
+      <p style="margin: 0;"><code>OpenVLA : LIBERO-Long</code></p>
+
+    </div>
+    <!-- Video -->
+    <video autoplay muted loop playsinline width="100%">
+      <source src="./static/videos/stuck.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Column 2 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">🟢</div>
+      <strong>“Up” Neuron Cluster Activated</strong>
+      <p style="margin: 0;">Activating neurons aligned with “Up” acts as a high-level behavioral nudge - reinitating stalled execution.</p>
+      <p style="margin: 0;"><code>OpenVLA : LIBERO-Long</code></p>
+    </div>
+    <!-- Video -->
+    <video autoplay muted loop playsinline width="100%">
+      <source src="./static/videos/unstuck.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+
+        <!-- 4. Ablations -->
+        <h4 class="title is-5">47 Ablations</h4>
+
+        <!-- Two Columns -->
+<div class="columns">
+  <!-- Column 1 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">🔎</div>
+      <strong>Binary Control Opposites</strong>
+      <p style="margin: 0;">Fast clusters consistently lead to larger step-wise end-effector displacement.</p>
+      <p style="margin: 0;"><code>OpenVLA : LIBERO-Long</code></p>
+    </div>
+    <img src="./static/images/steer_1.png" alt="Figure 3" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
+  </div>
+
+  <!-- Column 2 -->
+  <div class="column">
+    <!-- Light Grey Box Above Video -->
+    <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
+      <div style="font-size: 1.5rem;">📍</div>
+      <strong>Temporal Depth Analysis</strong>
+      <p style="margin: 0;">Full-model clusters consistently produce stronger motion effects.</p>
+      <p style="margin: 0;"><code>OpenVLA : LIBERO-Long</code></p>
+
+    </div>
+    <!-- Video -->
+    <img src="./static/images/steer_2.png" alt="Figure 3" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
+
+  </div>
+</div>
+
+
+    </section>
+    
+    
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> under a <a rel="license"
+            href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+Commons Attribution-ShareAlike 4.0 International License</a>.
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
