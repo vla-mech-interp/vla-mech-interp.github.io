@@ -126,16 +126,12 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3"><br>Abstract</h2>
         <div class="content has-text-justified">
-          <p>
-            Vision-Language-Action (VLA) models are a promising path to realizing generalist embodied agents that can quickly adapt to new tasks, modalities, and environments. However, methods for interpreting and steering VLAs fall far short of classical robotics pipelines, which are grounded in explicit models of kinematics, dynamics, and control. This lack of mechanistic insight is a central challenge for deploying learned policies in real-world robotics, where robustness and explainability are critical.
-       
+          <p>          
+            Motivated by advances in mechanistic interpretability for large language models, we introduce the first framework for interpreting and steering vision-language-action (VLA) models via their internal representations, enabling direct intervention in model behavior at inference time. We project feedforward activations within transformer blocks onto the token embedding basis, identifying sparse semantic directions – such as <em>speed</em> and <em>height</em> – that are causally linked to the VLA's control decisions.
           
-            Motivated by advances in mechanistic interpretability for large language models, we introduce the first framework for interpreting and steering VLAs via their internal representations, enabling direct intervention in model behavior at inference time. We project feedforward activations within transformer layers onto the token embedding basis, identifying sparse semantic directions – such as <em>speed</em>, <em>precision</em>, and <em>caution</em> – that are causally linked to action selection.
+            Leveraging these findings, we introduce a general-purpose activation steering method that modulates behavior in real time, without fine-tuning, reward signals, or environment interaction. We evaluate this method on two recent open-source VLAs, <span>&pi;<sub>0</sub></span> and <span style="font-variant: small-caps;">OpenVLA</span>, and demonstrate zero-shot behavioral control in simulation (LIBERO) and on a physical robot (UR5). Using semantically aligned neurons for robot control demonstrates a causal link between the VLA's internal (not prompted) semantic concepts and its non-semantic output behavior.
           
-          
-            Leveraging these findings, we introduce a general-purpose activation steering method that modulates behavior in real time, without fine-tuning, reward signals, or environment interaction. We evaluate this method on two recent open-source VLAs, <span>&pi;<sub>0</sub></span> and <span style="font-variant: small-caps;">OpenVLA</span>, and demonstrate both zero-shot behavioral control and task performance improvements in simulation (LIBERO) and on a physical robot (UR5).
-          
-            <strong>This work demonstrates that interpretable components of embodied VLAs can be systematically harnessed for control – establishing a new paradigm for transparent and steerable foundation models in robotics.</strong><br><br><br>
+            <strong>This work demonstrates that interpretable components of embodied VLAs can be harnessed for control – establishing a new paradigm for transparent and steerable foundation models in robotics.</strong><br><br><br>
           </p>
         </div>
       </div>
@@ -152,7 +148,7 @@
     <section class="section">
       <div class="container is-max-desktop">
         <h2 class="title is-3">Interpreting VLAs</h2>
-        <h3 class="title is-4">A compositional analytical method for scientists building VLAs</h3>
+        <h3 class="title is-4">An analytical method for scientists building and evaluating VLAs</h3>
 
         <div class="content has-text-justified">
           <p>
@@ -170,7 +166,7 @@
         
         
           <p>
-            Each fixed <strong>value vector</strong> \( w^{(i)}_\theta \) lives in token space.
+            Each fixed <strong>value vector</strong> \( w^{(i)}_\theta \) can be interpreted by what it contributes to the final output when strongly activated with a high <em>activation coefficient</em> \( [f_\theta(x)]_i \).
             By projecting these vectors to the model’s vocabulary, we identify <strong>semantically meaningful neurons</strong> — aligned with robot control concepts like
             <em>up</em>, <em>slow</em>, and <em>careful</em>.
           </p>
@@ -193,13 +189,13 @@
                     Post-VLA Training: Semantic Concepts Persist
                   </button>
                   <button class="button is-light is-fullwidth" style="flex: 1; white-space: normal;" onclick="showConceptTab(1)">
-                    Post-VLA Training: Action Tokens Appear in All Layers
+                    Post-VLA Training: Action and Semantic Tokens Appear in All Layers
                   </button>
                   <button class="button is-light is-fullwidth" style="flex: 1; white-space: normal;" onclick="showConceptTab(2)">
                     VLA Finetuning: Mainly Affects Action Tokens
                   </button>
                   <button class="button is-light is-fullwidth" style="flex: 1; white-space: normal;" onclick="showConceptTab(3)">
-                    VLA Finetuning: Induces a Specialized Distribution
+                    VLA Finetuning: Induces a Specialized Action Distribution
                   </button>
                 </div>
               </div>
@@ -211,7 +207,7 @@
                              <div class="concept-tab-pane active" style="flex: 1;">
                     <img src="./static/images/interp_1.png" alt="Figure 1" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
                     <p class="mt-2" style="font-size: 0.9rem;">
-                      <strong>Meaningful patterns in top value vector tokens.</strong> VLA training does not substantially change the proportion of FFN value vectors which have interpretable patterns (top lighter bars) and semantically meaningful patterns (bold bottom bars) in their top tokens.
+                      <strong>Meaningful patterns in top value vector tokens.</strong> VLA training does not substantially change the proportion of FFN value vectors which have interpretable patterns (top lighter bars) and semantically meaningful patterns (bold bottom bars) in their best-aligned tokens.
                     </p>
                   </div>
                   <!-- Tab 1 -->
@@ -225,7 +221,7 @@
                   <div class="concept-tab-pane" style="flex: 1;">
                     <img src="./static/images/interp_3.png" alt="Figure 3" style="max-height: 80%; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;">
                     <p class="mt-2" style="font-size: 0.9rem;">
-                      <strong>Task fine-tuning mainly affects action tokens.</strong> The most up-weighted and down-weighted tokens between the <span>&pi;<sub>0</sub>-FAST</span> and <span>&pi;<sub>0</sub>-FAST-DROID-finetune</span> models are action tokens.
+                      <strong>Task fine-tuning mainly affects action (not semantic) tokens.</strong> The most up-weighted and down-weighted tokens between the <span>&pi;<sub>0</sub>-FAST</span> and <span>&pi;<sub>0</sub>-FAST-DROID-finetune</span> models are action tokens.
                     </p>
                   </div>
                   <!-- Tab 3 -->
@@ -259,7 +255,7 @@
         
         
           <p>
-            Following Equation (1), we override activations for a subset \( \mathcal{S} \) of control-themed neuron clusters using a scalar \( \alpha \), inducing a residual shift:
+            Following Equation (1), we override activations for a subset \( \mathcal{S} \) of control-themed neuron clusters using a scalar \( \alpha \), inducing a shift in the FFN's output:
           </p>
         
                     <!-- Equation 2 -->
@@ -284,7 +280,7 @@
         
           <p>
             This shift propagates through the VLA and steers the final action distribution.
-            Across VLAs, we implement this in either <strong>PyTorch</strong> (via FFN hooks) or <strong>JAX</strong> (via a parameterized FFN), enabling direct behavioral modulation grounded in neuron semantics.
+            Across VLAs, we implement this in either <strong>PyTorch</strong> (via FFN hooks) or <strong>JAX</strong> (via a modified FFN), enabling direct behavioral modulation grounded in semantic concepts retained by the VLA.
           </p>
         </div>
     
@@ -404,10 +400,6 @@
   </div>
 </div>
 
-
-        
-
-
     </section>
     
     <!-- 78 Ablations (white background) -->
@@ -435,7 +427,7 @@
             <div style="background-color: #eaeaea; padding: 1rem; border-radius: 6px; margin-bottom: 0.5rem; text-align: center;">
               <div style="font-size: 1.5rem;">📍</div>
               <strong>Temporal Depth Analysis</strong>
-              <p style="margin: 0;">Full-model clusters consistently produce stronger motion effects.</p>
+              <p style="margin: 0;">Clusters that include neurons from later layers consistently produce stronger motion effects.</p>
               <p style="margin: 0;"><code>OpenVLA : LIBERO-Long</code></p>
 
             </div>
@@ -450,11 +442,11 @@
 <section class="section" id="BibTeX" style="background-color: #f5f5f5;">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@inproceedings{haon2025mechanistic,
+  author    = {Häon, Bear and Stocking, Kaylene and Chuang, Ian and Tomlin, Claire},
+  title     = {Mechanistic interpretability for steering vision-language-action models},
+  booktitle   = {Conference on Robot Learning},
+  year      = {2025},
 }</code></pre>
   </div>
 </section>
